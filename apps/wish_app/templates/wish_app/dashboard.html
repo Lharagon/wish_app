@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Wish List</title>
+	{% load staticfiles %}
+	<link rel="stylesheet"	href="{% static 'wish_app/style.css' %}">
+</head>
+<body>
+	<header>
+		<h1>Hello {{request.session.user}}</h1>
+			<nav>
+				<a href="{% url 'log_out' %}">Logout</a>
+			</nav>
+	</header>
+
+	<h5>Your Wish List:</h5>
+	<table>
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Added by</th>
+				<th>Date Added</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in my_wish_list %}
+				<tr>
+					<td><a href="{% url 'item_profile' id=item.id %}">{{item.item_name}}</a></td>
+					<td>{{item.creator.username}}</td>
+					<td>{{item.created_at}}</td>
+					{% if item.creator.id == request.session.user_id %}
+						<td><a href="{% url 'delete_item' id=item.id %}">Delete</a></td>
+					{% else %}
+						<td><a href="{% url 'remove_wish' id=item.id%}">Remove from my Wishlist</a></td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table> <br>
+	<h5>Other Users' Wish List</h5>
+	<table>
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Added by</th>
+				<th>Date Added</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in others_wishes %}
+				<tr>
+					<td><a href="{% url 'item_profile' id=item.id %}">{{item.item_name}}</a></td>
+					<td>{{item.creator.username}}</td>
+					<td>{{item.created_at}}</td>
+					<td><a href="{% url 'add_wish' id=item.id%}">Add to my Wishlist</a></t>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<a href="{% url 'add_page' %}" id="add_button">Add Item</a>
+</body>
+</html>

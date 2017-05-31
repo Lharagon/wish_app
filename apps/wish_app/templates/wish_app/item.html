@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{product.item_name}}</title>
+	{% load staticfiles %}
+	<link rel="stylesheet"	href="{% static 'wish_app/style.css' %}">
+</head>
+<body>
+	<header>
+		<nav>
+			<a href="{% url 'home' %}">Home</a>
+			<a href="{% url 'log_out' %}">Logout</a>
+		</nav>
+	</header>
+	<h1>{{product.item_name}}</h1>
+	<p>Users who added this product/item under their wish list:</p>
+	{% for person in people %}
+		<li>{{person.name}}</li>
+	{% endfor %}
+
+</body>
+</html>

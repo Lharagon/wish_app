@@ -1,0 +1,25 @@
+* {
+	font-family: Arial, sans-serif;
+}
+
+
+
+th {
+	border-bottom: 2px solid black;
+	margin: 0px;
+	background-color: lightgrey;
+}
+
+label, input {
+			display: block;
+}
+
+nav, #add_button{
+	float: right;
+}
+
+table {
+	width: 700px;
+	border: 2px solid black;
+	border-radius: 5px;
+}

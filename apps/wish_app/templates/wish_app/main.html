@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login/Registration</title>
+	{% load staticfiles %}
+	<link rel="stylesheet"	href="{% static 'wish_app/style.css' %}">
+	<style type="text/css">
+		label, input {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome!</h1>
+	{% if messages %}
+		{% for message in messages %}
+		<li>{{message}}</li>
+		{% endfor %}
+	{% endif %}
+	<form action="/register" method="post">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Registration</legend>
+			<label>Name:</label>
+			<input type="text" name="name">
+			<label>Username:</label>
+			<input type="text" name="username">
+			<label>Password:</label>
+			<input type="password" name="password">
+			<label>Confirm Password:</label>
+			<p>*Password should be at least 8 characters</p>
+			<input type="password" name="passconf">
+			<label>Date Hired:</label>
+			<input type="date" name="hired_date" max="2017-5-31">
+			<input type="submit" value="Register">
+		</fieldset>
+	</form>
+	<form action="/login" method="post">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Login</legend>
+			<label>Username:</label>
+			<input type="text" name="username">
+			<label>Password:</label>
+			<input type="password" name="password">
+			<input type="submit" value="Login">
+		</fieldset>
+	</form>
+
+
+
+</body>
+</html>
